@@ -7,6 +7,9 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <Rectangle Name="titlebar" Stroke="Black" Fill="Lime" StrokeThickness="0" />
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="1.8*"/>
+        </Grid.RowDefinitions>
     </Grid>
 </UserControl>

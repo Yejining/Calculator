@@ -18,3 +18,4 @@ C:\Users\User\Documents\GitHub\Calculator\Calculator\obj\Debug\Pad.g.cs
 C:\Users\User\Documents\GitHub\Calculator\Calculator\obj\Debug\Pad.baml
 C:\Users\User\Documents\GitHub\Calculator\Calculator\obj\Debug\Screen.g.cs
 C:\Users\User\Documents\GitHub\Calculator\Calculator\obj\Debug\Screen.baml
+C:\Users\User\Documents\GitHub\Calculator\Calculator\bin\Debug\Calculator.exe.config

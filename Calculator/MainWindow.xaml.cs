@@ -20,6 +20,7 @@ namespace Calculator
     /// </summary>
     public partial class MainWindow : Window
     {
+        private InputProcessor inputProcessor = new InputProcessor();
         private TitleBar titleBar = new TitleBar();
         private Pad pad = new Pad();
         private Screen screen = new Screen();
@@ -39,6 +40,9 @@ namespace Calculator
             pad.PassMainWindow(this);
             MainGrid.Children.Add(pad);
             Grid.SetRow(pad, 3);
+            inputProcessor.SetPad(pad);
+            
+            EventManager.RegisterClassHandler(typeof(Window), Keyboard.KeyUpEvent, new System.Windows.Input.KeyEventHandler(inputProcessor.keyUp), true);
         }
     }
 }
