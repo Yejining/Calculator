@@ -9,14 +9,14 @@
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="5"/>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Name="width" Width="*"/>
             <ColumnDefinition Width="5"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="1.8*"/>
         </Grid.RowDefinitions>
-        <Label Name="board" FontSize="18" Foreground="Gray" HorizontalAlignment="Right" VerticalAlignment="Bottom" Grid.Column="1" Grid.Row="0"/>
-        <Label Name="number" FontSize="50" FontWeight="Bold" HorizontalAlignment="Right" VerticalAlignment="Top" Grid.Column="1" Grid.Row="1"/>
+        <Label Name="board" Grid.Column="1" Grid.Row="0" FontSize="18" Foreground="Gray" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
+        <Label Name="number" Grid.Column="1" Grid.Row="1" FontSize="50" FontWeight="Bold" HorizontalAlignment="Right" VerticalAlignment="Top"/>
     </Grid>
 </UserControl>
