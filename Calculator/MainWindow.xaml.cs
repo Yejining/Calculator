@@ -20,19 +20,25 @@ namespace Calculator
     /// </summary>
     public partial class MainWindow : Window
     {
+        private TitleBar titleBar = new TitleBar();
+        private Pad pad = new Pad();
+        private Screen screen = new Screen();
+
         public MainWindow()
         {
             InitializeComponent();
-        }
 
-        private void titlebar_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            DragMove();
-        }
+            titleBar.PassMainWindow(this);
+            MainGrid.Children.Add(titleBar);
+            Grid.SetRow(titleBar, 0);
 
-        private void closeButton_Click(object sender, RoutedEventArgs e)
-        {
-            Close();
+            screen.PassMainWindow(this);
+            MainGrid.Children.Add(screen);
+            Grid.SetRow(screen, 2);
+
+            pad.PassMainWindow(this);
+            MainGrid.Children.Add(pad);
+            Grid.SetRow(pad, 3);
         }
     }
 }
