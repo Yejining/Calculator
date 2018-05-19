@@ -19,16 +19,20 @@ namespace Calculator
     /// </summary>
     public partial class Screen : UserControl
     {
-        private MainWindow mainWindow;
-
         public Screen()
         {
             InitializeComponent();
         }
 
-        public void PassMainWindow(MainWindow mainWindow)
+        public void WriteBoard(string sentence)
         {
-            this.mainWindow = mainWindow;
+            board.Content = sentence;
+        }
+
+        public void WriteNumber(string number)
+        {
+            
+            this.number.Content = number;
         }
     }
 }

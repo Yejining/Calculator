@@ -6,11 +6,23 @@ using System.Windows;
 
 namespace Calculator
 {
-    class Calculation
+    public class Calculation
     {
-        public static void AddNumber(int number)
-        {   
-            //MessageBox.Show($"숫자 입력 : {number}");
+        private Screen screen;
+
+        private string board = "";
+        private string sentence = "";
+        
+        public void AddNumber(int number)
+        {
+            sentence += number;
+            screen.WriteNumber(sentence);
+            screen.WriteBoard(sentence);
+        }
+
+        public void SetClass(Screen screen)
+        {
+            this.screen = screen;
         }
     }
 }

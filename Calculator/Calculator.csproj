@@ -58,7 +58,6 @@
     </ApplicationDefinition>
     <Compile Include="Calculation.cs" />
     <Compile Include="Constant.cs" />
-    <Compile Include="InputProcessor.cs" />
     <Compile Include="Screen.xaml.cs">
       <DependentUpon>Screen.xaml</DependentUpon>
     </Compile>

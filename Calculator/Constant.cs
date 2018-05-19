@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Windows.Input;
+using System.Windows.Media;
 
 namespace Calculator
 {
@@ -26,5 +27,7 @@ namespace Calculator
             "eight",
             "nine"
         };
+
+        public static Color BUTTON_COLOR = (Color)ColorConverter.ConvertFromString("#FFDDDDDD");
     }
 }

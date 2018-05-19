@@ -20,10 +20,10 @@ namespace Calculator
     /// </summary>
     public partial class MainWindow : Window
     {
-        private InputProcessor inputProcessor = new InputProcessor();
         private TitleBar titleBar = new TitleBar();
         private Pad pad = new Pad();
         private Screen screen = new Screen();
+        private Calculation calculation = new Calculation();
 
         public MainWindow()
         {
@@ -32,17 +32,17 @@ namespace Calculator
             titleBar.PassMainWindow(this);
             MainGrid.Children.Add(titleBar);
             Grid.SetRow(titleBar, 0);
-
-            screen.PassMainWindow(this);
+            
             MainGrid.Children.Add(screen);
             Grid.SetRow(screen, 2);
 
-            pad.PassMainWindow(this);
+            pad.SetClass(calculation);
             MainGrid.Children.Add(pad);
             Grid.SetRow(pad, 3);
-            inputProcessor.SetPad(pad);
-            
-            EventManager.RegisterClassHandler(typeof(Window), Keyboard.KeyUpEvent, new System.Windows.Input.KeyEventHandler(inputProcessor.keyUp), true);
+
+            calculation.SetClass(screen);
+
+            EventManager.RegisterClassHandler(typeof(Window), Keyboard.KeyUpEvent, new System.Windows.Input.KeyEventHandler(pad.keyUp), true);
         }
     }
 }
