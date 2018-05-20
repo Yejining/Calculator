@@ -12,6 +12,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Threading.Tasks;
+using System.Diagnostics;
 
 namespace Calculator
 {
@@ -21,6 +22,9 @@ namespace Calculator
     public partial class Pad : UserControl
     {
         private Calculation calculation;
+        private bool isShift = false;
+        private Stopwatch stopwatch = new Stopwatch();
+        private long time;
 
         /// <summary>
         /// Pad의 생성자 메소드입니다.
@@ -37,7 +41,7 @@ namespace Calculator
 
         private void initializationButton_Click(object sender, RoutedEventArgs e)
         {
-
+            calculation.Initialize(Int32.Parse((sender as Button).Tag.ToString()));
         }
 
         private void operationButton_Click(object sender, RoutedEventArgs e)
@@ -52,36 +56,137 @@ namespace Calculator
 
         public void keyUp(object sender, KeyEventArgs e)
         {
-            int hashCode = (int)e.Key.GetHashCode() - 34;
+            if (e.Key == Key.LeftShift || e.Key == Key.RightShift)
+            {
+                isShift = true;
+                stopwatch.Start();
+                return;
+            }
 
-            if (hashCode == 110) hashCode -= 100;
+            if (stopwatch.IsRunning)
+            {
+                stopwatch.Stop();
+                time = stopwatch.ElapsedMilliseconds;
 
+                if (isShift && time > 500) isShift = false;
+            }
+            
+            if (e.KeyboardDevice.IsKeyDown(Key.LeftShift) || e.KeyboardDevice.IsKeyDown(Key.RightShift) || isShift)
+            {
+                if (e.Key == Key.OemPlus)
+                {
+                    PressKey("addtion");
+                    calculation.AddOperation(Constant.ADDTION);
+                }
+                else if (e.Key == Key.D8)
+                {
+                    PressKey("multiplication");
+                    calculation.AddOperation(Constant.MULTIPLICATION);
+                }
+
+                isShift = false;
+
+                return;
+            }
+            
             if (IsInitializationKey(e.Key))
             {
-
+                PressInitializationKey((int)e.Key.GetHashCode());
             }
             else if (IsOperationKey(e.Key))
             {
-                // 연산키 눌렀을 때
+                PressOperationKey((int)e.Key.GetHashCode());
             }
-            else if(IsNumberKey(e.Key))
+            else if (IsNumberKey(e.Key))
             {
-                PressKey(hashCode);
-                calculation.AddNumber(ButtonContent(hashCode));
+                PressNumberKey((int)e.Key.GetHashCode());
             }
         }
 
-        public string ButtonContent(int tag)
+        public void PressInitializationKey(int hashcode)
         {
-            string name = Constant.NUMBER[tag];
-            Button button = (Button)this.FindName(name);
+            string name;
+            int key;
 
-            return button.Content.ToString();
+            switch (hashcode)
+            {
+                case Constant.ESCAPE:
+                    name = "C";
+                    key = Constant.C;
+                    break;
+                case Constant.DELETE:
+                    name = "CE";
+                    key = Constant.CE;
+                    break;
+                case Constant.ENTER:
+                    name = "equal";
+                    key = Constant.EQUAL;
+                    break;
+                case Constant.OEM_PLUS:
+                    name = "equal";
+                    key = Constant.EQUAL;
+                    break;
+                case Constant.BACK:
+                    name = "backspace";
+                    key = Constant.BACKSPACE;
+                    break;
+                default:
+                    name = "";
+                    key = -1;
+                    break;
+            }
+
+            PressKey(name);
+            calculation.Initialize(key);
         }
 
-        public async void PressKey(int tag)
+        public void PressOperationKey(int hashcode)
         {
-            string name = Constant.NUMBER[tag];
+            string name;
+            int key;
+
+            switch (hashcode)
+            {
+                case Constant.MINUS:
+                    name = "subtraction";
+                    key = Constant.SUBTRACTION;
+                    break;
+                case Constant.F9:
+                    name = "negate";
+                    key = Constant.NEGATE;
+                    break;
+                case Constant.OEM_QUESTION:
+                    name = "devision";
+                    key = Constant.DEVISION;
+                    break;
+                default:
+                    name = "";
+                    key = -1;
+                    break;
+            }
+
+            PressKey(name);
+            calculation.AddOperation(key);
+        }
+
+        public void PressNumberKey(int hashcode)
+        {
+            int tag;
+            string name;
+            
+            if (hashcode == 144)
+                tag = 10;
+            else
+                tag = hashcode - 34;
+
+            name = Constant.NUMBER_KEY[tag];
+            
+            PressKey(name);
+            calculation.AddNumber(((Button)this.FindName(name)).Content.ToString());
+        }
+
+        public async void PressKey(string name)
+        {
             Button button = (Button)this.FindName(name);
 
             button.Background = Brushes.DimGray;
@@ -89,12 +194,15 @@ namespace Calculator
             button.Background = new SolidColorBrush(Constant.BUTTON_COLOR);
         }
 
-        public bool IsNumberKey(Key key)
+        public bool IsInitializationKey(Key key)
         {
-            if (key >= Key.D0 && key <= Key.D9 || key == Key.OemPeriod)
-                return true;
-            else
-                return false;
+            foreach (Key symbol in Constant.INITIALIZATION_KEY)
+            {
+                if (key == symbol)
+                    return true;
+            }
+
+            return false;
         }
 
         public bool IsOperationKey(Key key)
@@ -108,15 +216,12 @@ namespace Calculator
             return false;
         }
 
-        public bool IsInitializationKey(Key key)
+        public bool IsNumberKey(Key key)
         {
-            foreach (Key symbol in Constant.INITIALIZATION_KEY)
-            {
-                if (key == symbol)
-                    return true;
-            }
-
-            return false;
+            if (key >= Key.D0 && key <= Key.D9 || key == Key.OemPeriod)
+                return true;
+            else
+                return false;
         }
     }
 }

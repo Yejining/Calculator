@@ -13,14 +13,58 @@ namespace Calculator
         private double number = 0;
         private int operation = -1;
         private string board = "";
-        private string numberToCalculate = "";
+        private string numberToCalculate = "0";
 
-        private bool isNewNumberInput = true;
-        private bool isFraction = false;
+        private int symbolInputCount = 0;
+        private bool isNewNumberInput = true;   // 숫자가 처음 입력되는지 판별
+        private bool isFraction = false;        // 소수점 입력됐는지 판별
         
+        public void Initialize(int key)
+        {
+            switch (key)
+            {
+                case Constant.CE:
+                    numberToCalculate = "0";
+                    isNewNumberInput = true;
+                    isFraction = false;
+                    break;
+                case Constant.C:
+                    number = 0;
+                    operation = -1;
+                    board = "";
+                    numberToCalculate = "0";
+                    symbolInputCount = 0;
+                    isNewNumberInput = true;
+                    isFraction = false;
+                    break;
+                case Constant.BACKSPACE:
+                    if (numberToCalculate.Length != 0 && !isNewNumberInput)
+                        numberToCalculate = numberToCalculate.Remove(numberToCalculate.Length - 1);
+                    break;
+                case Constant.EQUAL:
+                    Calculate();
+                    board = "";
+                    break;
+            }
+
+            PostOnScreen();
+        }
+
         public void AddOperation(int symbol)
         {
             isNewNumberInput = false;
+            symbolInputCount++;
+
+            // 계산할 숫자가 0인 경우
+            if (Convert.ToDouble(numberToCalculate) == 0)
+            {
+                numberToCalculate = "0";
+                isFraction = false;
+            }
+
+            // 쓸모없는 0 지우기
+            while ((isFraction && numberToCalculate[numberToCalculate.Length - 1] == '0') || numberToCalculate[numberToCalculate.Length - 1] == '.')
+                numberToCalculate = numberToCalculate.Remove(numberToCalculate.Length - 1);
 
             // board가 비어있을 경우
             if (board.Length == 0 && numberToCalculate.Length == 0)
@@ -29,11 +73,14 @@ namespace Calculator
                 number = Convert.ToDouble(numberToCalculate);
 
             // 연산기호가 연속적으로 입력되는 경우
-            if (numberToCalculate.Length == 0 && operation != -1)
+            if (numberToCalculate.Length == 0 && operation != -1 || symbolInputCount > 1)
+            {
                 board = board.Remove(board.Length - 2);
+                operation = -1;
+            }
 
             // 계산기 기능 시작시 연산부터 입력하는 경우
-            if (numberToCalculate.Length == 0)
+            if (numberToCalculate.Length == 0 || symbolInputCount > 1)
                 board = $"{board} {Constant.OPERATION[symbol]}";
             else
                 board = $"{board} {numberToCalculate} {Constant.OPERATION[symbol]}";
@@ -103,10 +150,14 @@ namespace Calculator
                     number += Convert.ToDouble(numberToCalculate);
                     break;
             }
+
+            numberToCalculate = number.ToString();
         }
 
         public void AddNumber(string number)
         {
+            symbolInputCount = 0;
+
             if (isNewNumberInput)
             {
                 numberToCalculate = "";
