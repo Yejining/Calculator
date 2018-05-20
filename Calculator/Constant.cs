@@ -9,9 +9,14 @@ namespace Calculator
 {
     class Constant
     {
-        public static Key[] OPERATION_KEYS =
+        public static Key[] OPERATION_KEY =
         {
-            Key.OemMinus, Key.OemPlus, Key.F9, Key.OemQuestion, Key.Escape, Key.Enter
+            Key.OemMinus, Key.OemPlus, Key.F9, Key.OemQuestion, Key.D8
+        };
+
+        public static Key[] INITIALIZATION_KEY =
+        {
+            Key.Escape, Key.Delete, Key.Enter, Key.OemPlus
         };
 
         public static string[] NUMBER =
@@ -25,8 +30,24 @@ namespace Calculator
             "six",
             "seven",
             "eight",
-            "nine"
+            "nine",
+            "dot"
         };
+
+        public static string[] OPERATION =
+        {
+            "÷",
+            "×",
+            "-",
+            "+",
+            "negate"
+        };
+
+        public const int DEVISION = 0;
+        public const int MULTIPLICATION = 1;
+        public const int SUBTRACTION = 2;
+        public const int ADDTION = 3;
+        public const int NEGATE = 4;
 
         public static Color BUTTON_COLOR = (Color)ColorConverter.ConvertFromString("#FFDDDDDD");
     }

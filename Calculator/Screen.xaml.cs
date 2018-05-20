@@ -36,7 +36,9 @@ namespace Calculator
         {
             double inputWidth = InputWidth(number);
 
-            while (InputWidth(number) > width.ActualWidth - 7)
+            this.number.FontSize = 50;
+
+            while (InputWidth(number) > width.ActualWidth - 8)
                 this.number.FontSize -= 3;
 
             if (this.number.FontSize < 5)

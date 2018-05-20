@@ -17,6 +17,6 @@
             <RowDefinition Height="1.8*"/>
         </Grid.RowDefinitions>
         <Label Name="board" Grid.Column="1" Grid.Row="0" FontSize="18" Foreground="Gray" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
-        <Label Name="number" Grid.Column="1" Grid.Row="1" FontSize="50" FontWeight="Bold" HorizontalAlignment="Right" VerticalAlignment="Top"/>
+        <Label Name="number" Content="0" Grid.Column="1" Grid.Row="1" FontSize="50" FontWeight="Bold" HorizontalAlignment="Right" VerticalAlignment="Top"/>
     </Grid>
 </UserControl>

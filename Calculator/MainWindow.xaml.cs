@@ -32,7 +32,7 @@ namespace Calculator
             titleBar.PassMainWindow(this);
             MainGrid.Children.Add(titleBar);
             Grid.SetRow(titleBar, 0);
-            
+
             MainGrid.Children.Add(screen);
             Grid.SetRow(screen, 2);
 

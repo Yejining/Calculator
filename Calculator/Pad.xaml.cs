@@ -35,22 +35,48 @@ namespace Calculator
             this.calculation = calculation;
         }
 
+        private void initializationButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void operationButton_Click(object sender, RoutedEventArgs e)
+        {
+            calculation.AddOperation(Int32.Parse((sender as Button).Tag.ToString()));
+        }
+
         private void numberButton_Click(object sender, RoutedEventArgs e)
         {
-            calculation.AddNumber(Int32.Parse((sender as Button).Tag.ToString()));
+            calculation.AddNumber((sender as Button).Tag.ToString());
         }
 
         public void keyUp(object sender, KeyEventArgs e)
         {
-            if (IsNumberKey(e.Key))
+            int hashCode = (int)e.Key.GetHashCode() - 34;
+
+            if (hashCode == 110) hashCode -= 100;
+
+            if (IsInitializationKey(e.Key))
             {
-                PressKey((int)e.Key.GetHashCode() - 34);
-                calculation.AddNumber((int)e.Key.GetHashCode() - 34);
+
             }
-            else if (IsSymbolKey(e.Key))
+            else if (IsOperationKey(e.Key))
             {
                 // 연산키 눌렀을 때
             }
+            else if(IsNumberKey(e.Key))
+            {
+                PressKey(hashCode);
+                calculation.AddNumber(ButtonContent(hashCode));
+            }
+        }
+
+        public string ButtonContent(int tag)
+        {
+            string name = Constant.NUMBER[tag];
+            Button button = (Button)this.FindName(name);
+
+            return button.Content.ToString();
         }
 
         public async void PressKey(int tag)
@@ -65,15 +91,26 @@ namespace Calculator
 
         public bool IsNumberKey(Key key)
         {
-            if (key >= Key.D0 && key <= Key.D9)
+            if (key >= Key.D0 && key <= Key.D9 || key == Key.OemPeriod)
                 return true;
             else
                 return false;
         }
 
-        public bool IsSymbolKey(Key key)
+        public bool IsOperationKey(Key key)
         {
-            foreach (Key symbol in Constant.OPERATION_KEYS)
+            foreach (Key symbol in Constant.OPERATION_KEY)
+            {
+                if (key == symbol)
+                    return true;
+            }
+
+            return false;
+        }
+
+        public bool IsInitializationKey(Key key)
+        {
+            foreach (Key symbol in Constant.INITIALIZATION_KEY)
             {
                 if (key == symbol)
                     return true;

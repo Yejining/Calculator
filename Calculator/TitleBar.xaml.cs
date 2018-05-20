@@ -36,7 +36,25 @@ namespace Calculator
             mainWindow.DragMove();
         }
 
-        private void closeButton_Click(object sender, RoutedEventArgs e)
+        private void close_MouseEnter(object sender, MouseEventArgs e)
+        {
+            close.Background = Brushes.Red;
+            close.Foreground = Brushes.White;
+        }
+
+        private void close_MouseLeave(object sender, MouseEventArgs e)
+        {
+            close.Background = Brushes.Transparent;
+            close.Opacity = 1;
+            close.Foreground = Brushes.Gray;
+        }
+
+        private void close_MouseLeftButtonDown(object sender, MouseEventArgs e)
+        {
+            close.Opacity = 0.5;
+        }
+
+        private void close_MouseLeftButtonUp(object sender, MouseEventArgs e)
         {
             mainWindow.Close();
         }
