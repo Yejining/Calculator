@@ -19,6 +19,7 @@ namespace Calculator
         private int symbolInputCount = 0;
         private int negateInputCount = 0;
         private bool wasNegate = false;
+        private bool isNewEqual = true;
         private bool isNewNumberInput = true;   // 숫자가 처음 입력되는지 판별
         private bool isInputNumberProcess = false;
         private bool isFraction = false;        // 소수점 입력됐는지 판별
@@ -52,26 +53,15 @@ namespace Calculator
                         isFraction = false;
                     break;
                 case Constant.EQUAL:
-                    if (!isNewNumberInput)
-                    {
-                        Calculate();
-                        number = 0;
-                        operation = -1;
-                        board = "";
-                        symbolInputCount = 0;
-                        isNewNumberInput = true;
-                        isFraction = false;
-                        PostOnScreen();
-                    }
-                    else
-                    {
-                        numberToKeep = string.Copy(numberToCalculate);
-                        Calculate();
-                        board = "";
-                        numberToCalculate = string.Copy(numberToKeep);
-                        PostOnScreen();
-                    }
-                    
+                    isNewEqual = false;
+                    numberToKeep = string.Copy(numberToCalculate);
+                    Calculate();
+                    board = "";
+                    symbolInputCount = 0;
+                    isNewNumberInput = true;
+                    isFraction = false;
+                    PostOnScreen();
+                    numberToCalculate = string.Copy(numberToKeep);
                     return;
             }
 
@@ -80,6 +70,13 @@ namespace Calculator
 
         public void AddOperation(int symbol)
         {
+            if (!isNewEqual)
+            {
+                numberToCalculate = number.ToString();
+                operation = -1;
+                isNewEqual = true;
+            }
+
             isNewNumberInput = false;
 
             if (symbol != Constant.NEGATE)
@@ -117,14 +114,18 @@ namespace Calculator
                 number = Convert.ToDouble(numberToCalculate);
 
             // 연산기호가 연속적으로 입력되는 경우
-            if (numberToCalculate.Length == 0 && operation != -1 || symbolInputCount > 1 && !wasNegate)
+            if (symbolInputCount > 1 && !wasNegate && symbol != Constant.NEGATE)
             {
                 board = board.Remove(board.Length - 2);
                 operation = -1;
             }
 
             // 계산기 기능 시작시 연산부터 입력하는 경우
-            if (symbol != Constant.NEGATE && !wasNegate)
+            if (symbolInputCount > 1 && symbol != Constant.NEGATE)
+            {
+                board = $"{board} {Constant.OPERATION[symbol]}";
+            }
+            else if (symbol != Constant.NEGATE && !wasNegate)
             {
                 if (Convert.ToDouble(numberToCalculate) == 0 && numberToCalculate[0] == '-')
                     numberToCalculate = numberToCalculate.Remove(0, 1);
@@ -203,8 +204,6 @@ namespace Calculator
 
                 PostOnScreen();
 
-                number += Convert.ToDouble(numberToCalculate);
-
                 if (board.Length == 0 && negateInputCount == 0)
                     board = $"{board} {numberToCalculate}";
 
@@ -267,6 +266,8 @@ namespace Calculator
 
         public void AddNumber(string number)
         {
+            isNewEqual = true;
+
             if (numberToCalculate.Length > 16)
                 return;
 
