@@ -188,10 +188,29 @@ namespace Calculator
         public async void PressKey(string name)
         {
             Button button = (Button)this.FindName(name);
+            bool isChanged = false;
 
-            button.Background = Brushes.DimGray;
+            button.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#EFE4B0"));
             await Task.Delay(100);
-            button.Background = new SolidColorBrush(Constant.BUTTON_COLOR);
+
+            foreach (string color in Constant.NUMBER_KEY)
+            {
+                if (string.Compare(color, name) == 0)
+                {
+                    button.Background = new SolidColorBrush(Constant.BUTTON_COLOR);
+                    isChanged = true;
+                    break;
+                }
+            }
+
+            if (string.Compare(name, "dot") == 0)
+            {
+                button.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#B9B9B9"));
+                isChanged = true;
+            }
+
+            if (!isChanged)
+                button.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#B9B9B9"));
         }
 
         public bool IsInitializationKey(Key key)

@@ -31,16 +31,16 @@
             <ColumnDefinition Width="*"></ColumnDefinition>
             <ColumnDefinition Width="5"></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <Button Name="CE" Tag="0" Content="CE" Grid.Row="1" Grid.Column="1" BorderThickness="0" Click="initializationButton_Click"/>
-        <Button Name="C" Tag="1" Content="C" Grid.Row="1" Grid.Column="3" BorderThickness="0" Click="initializationButton_Click"/>
-        <Button Name="backspace" Tag="2" Content="지우기" Grid.Row="1" Grid.Column="5" BorderThickness="0" Click="initializationButton_Click"/>
-        <Button Name="equal" Tag="3" Content="=" Grid.Row="9" Grid.Column="7" BorderThickness="0" Click="initializationButton_Click"/>
-        
-        <Button Name="devision" Tag="0" Content="÷" Grid.Row="1" Grid.Column="7" BorderThickness="0" Click="operationButton_Click"/>
-        <Button Name="multiplication" Tag="1" Content="×" Grid.Row="3" Grid.Column="7" BorderThickness="0" Click="operationButton_Click"/>
-        <Button Name="subtraction" Tag="2" Content="－" Grid.Row="5" Grid.Column="7" BorderThickness="0" Click="operationButton_Click"/>
-        <Button Name="addtion" Tag="3" Content="＋" Grid.Row="7" Grid.Column="7" BorderThickness="0" Click="operationButton_Click"/>
-        <Button Name="negate" Tag="4" Content="±" Grid.Row="9" Grid.Column="1" BorderThickness="0" Click="operationButton_Click"/>
+        <Button Name="CE" Tag="0" Content="CE" Grid.Row="1" Grid.Column="1" BorderThickness="0" Click="initializationButton_Click" Background="#B9B9B9"/>
+        <Button Name="C" Tag="1" Content="C" Grid.Row="1" Grid.Column="3" BorderThickness="0" Click="initializationButton_Click" Background="#B9B9B9"/>
+        <Button Name="backspace" Tag="2" Content="지우기" Grid.Row="1" Grid.Column="5" BorderThickness="0" Click="initializationButton_Click" Background="#B9B9B9"/>
+        <Button Name="equal" Tag="3" Content="=" Grid.Row="9" Grid.Column="7" BorderThickness="0" Click="initializationButton_Click" Background="#B9B9B9"/>
+
+        <Button Name="devision" Tag="0" Content="÷" Grid.Row="1" Grid.Column="7" BorderThickness="0" Click="operationButton_Click" Background="#B9B9B9"/>
+        <Button Name="multiplication" Tag="1" Content="×" Grid.Row="3" Grid.Column="7" BorderThickness="0" Click="operationButton_Click" Background="#B9B9B9"/>
+        <Button Name="subtraction" Tag="2" Content="－" Grid.Row="5" Grid.Column="7" BorderThickness="0" Click="operationButton_Click" Background="#B9B9B9"/>
+        <Button Name="addtion" Tag="3" Content="＋" Grid.Row="7" Grid.Column="7" BorderThickness="0" Click="operationButton_Click" Background="#B9B9B9"/>
+        <Button Name="negate" Tag="4" Content="±" Grid.Row="9" Grid.Column="1" BorderThickness="0" Click="operationButton_Click" Background="#B9B9B9"/>
 
         <Button Name="zero" Tag="0" Content="0" Grid.Row="9" Grid.Column="3" BorderThickness="0" Click="numberButton_Click"/>
         <Button Name="one" Tag="1" Content="1" Grid.Row="7" Grid.Column="1" BorderThickness="0" Click="numberButton_Click"/>
@@ -52,6 +52,6 @@
         <Button Name="seven" Tag="7" Content="7" Grid.Row="3" Grid.Column="1" BorderThickness="0" Click="numberButton_Click"/>
         <Button Name="eight" Tag="8" Content="8" Grid.Row="3" Grid.Column="3" BorderThickness="0" Click="numberButton_Click"/>
         <Button Name="nine" Tag="9" Content="9" Grid.Row="3" Grid.Column="5" BorderThickness="0" Click="numberButton_Click"/>
-        <Button Name="dot" Tag="." Content="." Grid.Row="9" Grid.Column="5" BorderThickness="0" Click="numberButton_Click"/>
+        <Button Name="dot" Tag="." Content="." Grid.Row="9" Grid.Column="5" BorderThickness="0" Click="numberButton_Click" Background="#B9B9B9"/>
     </Grid>
 </UserControl>
