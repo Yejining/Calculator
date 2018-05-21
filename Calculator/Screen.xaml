@@ -8,15 +8,20 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="5"/>
+            <ColumnDefinition Width="15"/>
             <ColumnDefinition Name="width" Width="*"/>
-            <ColumnDefinition Width="5"/>
+            <ColumnDefinition Width="15"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="1.8*"/>
         </Grid.RowDefinitions>
-        <Label Name="board" Grid.Column="1" Grid.Row="0" FontSize="18" Foreground="Gray" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
+        <Button Name="left" Grid.Column="0" Grid.Row="0" Content="《" Foreground="#F4D96E" VerticalAlignment="Bottom" VerticalContentAlignment="Top" HorizontalContentAlignment="Right" Height="20"
+                Background="Transparent" BorderThickness="0" Visibility="Hidden" Click="left_Click"/>
+        <TextBox Name="board" Grid.Column="1" Grid.Row="0" FontSize="18" Foreground="Gray" HorizontalAlignment="Right" VerticalAlignment="Bottom"
+                 IsReadOnly="True" Background="Transparent" BorderThickness="0"/>
+        <Button Name="right" Grid.Column="2" Grid.Row="0" Content="》" Foreground="#F4D96E" VerticalAlignment="Bottom" HorizontalContentAlignment="Left" Height="20"
+                Background="Transparent" BorderThickness="0" Visibility="Hidden" Click="right_Click"/>
         <Label Name="number" Content="0" Grid.Column="1" Grid.Row="1" FontSize="50" FontWeight="Bold" HorizontalAlignment="Right" VerticalAlignment="Top"/>
     </Grid>
 </UserControl>

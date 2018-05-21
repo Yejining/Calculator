@@ -76,6 +76,9 @@ namespace Calculator
         public const int OEM_PLUS = 141;
         public const int BACK = 2;
 
+        public const int UPPER_BOARD = 0;
+        public const int LOWER_BOARD = 1;
+
         public static Color BUTTON_COLOR = (Color)ColorConverter.ConvertFromString("#FFDDDDDD");
     }
 }
