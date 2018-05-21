@@ -253,6 +253,9 @@ namespace Calculator
 
         public void AddNumber(string number)
         {
+            if (numberToCalculate.Length > 16)
+                return;
+
             isInputNumberProcess = true;
 
             symbolInputCount = 0;

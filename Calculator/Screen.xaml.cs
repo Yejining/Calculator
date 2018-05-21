@@ -20,11 +20,27 @@ namespace Calculator
     /// </summary>
     public partial class Screen : UserControl
     {
-        private bool isValidInputLength = true;
-
         public Screen()
         {
             InitializeComponent();
+        }
+
+        public string InsertComma(string number)
+        {
+            int dot = number.IndexOf('.');
+
+            if (dot == -1)
+            {
+                for (int index = number.Length - 3; index > 0; index -= 3)
+                    number = number.Insert(index, ",");
+            }
+            else
+            {
+                for (int index = dot - 3; index > 0; index -= 3)
+                    number = number.Insert(index, ",");
+            }
+
+            return number;
         }
 
         public void WriteBoard(string sentence)
@@ -45,13 +61,12 @@ namespace Calculator
 
         public void WriteNumber(string number)
         {
+            number = InsertComma(number);
+
             this.number.FontSize = 50;
 
             while (InputWidth(number, Constant.LOWER_BOARD) > width.ActualWidth - 8)
                 this.number.FontSize -= 3;
-
-            if (this.number.FontSize < 5)
-                isValidInputLength = false;
 
             this.number.Content = number;
         }
