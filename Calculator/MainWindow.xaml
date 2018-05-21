@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Calculator"
         mc:Ignorable="d"
-        Title="계산기" Height="530" Width="320"
+        Title="계산기" Height="450" Width="320"
         AllowsTransparency="True" WindowStyle="None">
     <Window.Background>
         <SolidColorBrush Opacity="0.95" Color="LightGray"/>
@@ -14,7 +14,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="30"/>
             <RowDefinition Height="45"/>
-            <RowDefinition Height="25*"/>
+            <RowDefinition Height="45*"/>
             <RowDefinition Name="buttonSpace" Height="85*"/>
         </Grid.RowDefinitions>
     </Grid>

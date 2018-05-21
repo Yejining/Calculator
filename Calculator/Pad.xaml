@@ -9,10 +9,6 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="5"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="4"/>
-            <RowDefinition Height="2*"/>
-            <RowDefinition Height="4"/>
             <RowDefinition Height="2*"/>
             <RowDefinition Height="4"/>
             <RowDefinition Height="2*"/>
@@ -35,32 +31,27 @@
             <ColumnDefinition Width="*"></ColumnDefinition>
             <ColumnDefinition Width="5"></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <Button Name="percent" Content="%" Grid.Row="3" Grid.Column="1" BorderThickness="0"/>
-        <Button Name="root" Content="√" Grid.Row="3" Grid.Column="3" BorderThickness="0"/>
-        <Button Name="XSquare" Content="x²" Grid.Row="3" Grid.Column="5" BorderThickness="0"/>
-        <Button Name="OneOverX" Content="1/x" Grid.Row="3" Grid.Column="7" BorderThickness="0"/>
-
-        <Button Name="CE" Tag="0" Content="CE" Grid.Row="5" Grid.Column="1" BorderThickness="0" Click="initializationButton_Click"/>
-        <Button Name="C" Tag="1" Content="C" Grid.Row="5" Grid.Column="3" BorderThickness="0" Click="initializationButton_Click"/>
-        <Button Name="backspace" Tag="2" Content="지우기" Grid.Row="5" Grid.Column="5" BorderThickness="0" Click="initializationButton_Click"/>
-        <Button Name="equal" Tag="3" Content="=" Grid.Row="13" Grid.Column="7" BorderThickness="0" Click="initializationButton_Click"/>
+        <Button Name="CE" Tag="0" Content="CE" Grid.Row="1" Grid.Column="1" BorderThickness="0" Click="initializationButton_Click"/>
+        <Button Name="C" Tag="1" Content="C" Grid.Row="1" Grid.Column="3" BorderThickness="0" Click="initializationButton_Click"/>
+        <Button Name="backspace" Tag="2" Content="지우기" Grid.Row="1" Grid.Column="5" BorderThickness="0" Click="initializationButton_Click"/>
+        <Button Name="equal" Tag="3" Content="=" Grid.Row="9" Grid.Column="7" BorderThickness="0" Click="initializationButton_Click"/>
         
-        <Button Name="devision" Tag="0" Content="÷" Grid.Row="5" Grid.Column="7" BorderThickness="0" Click="operationButton_Click"/>
-        <Button Name="multiplication" Tag="1" Content="×" Grid.Row="7" Grid.Column="7" BorderThickness="0" Click="operationButton_Click"/>
-        <Button Name="subtraction" Tag="2" Content="－" Grid.Row="9" Grid.Column="7" BorderThickness="0" Click="operationButton_Click"/>
-        <Button Name="addtion" Tag="3" Content="＋" Grid.Row="11" Grid.Column="7" BorderThickness="0" Click="operationButton_Click"/>
-        <Button Name="negate" Tag="4" Content="±" Grid.Row="13" Grid.Column="1" BorderThickness="0" Click="operationButton_Click"/>
+        <Button Name="devision" Tag="0" Content="÷" Grid.Row="1" Grid.Column="7" BorderThickness="0" Click="operationButton_Click"/>
+        <Button Name="multiplication" Tag="1" Content="×" Grid.Row="3" Grid.Column="7" BorderThickness="0" Click="operationButton_Click"/>
+        <Button Name="subtraction" Tag="2" Content="－" Grid.Row="5" Grid.Column="7" BorderThickness="0" Click="operationButton_Click"/>
+        <Button Name="addtion" Tag="3" Content="＋" Grid.Row="7" Grid.Column="7" BorderThickness="0" Click="operationButton_Click"/>
+        <Button Name="negate" Tag="4" Content="±" Grid.Row="9" Grid.Column="1" BorderThickness="0" Click="operationButton_Click"/>
 
-        <Button Name="zero" Tag="0" Content="0" Grid.Row="13" Grid.Column="3" BorderThickness="0" Click="numberButton_Click"/>
-        <Button Name="one" Tag="1" Content="1" Grid.Row="11" Grid.Column="1" BorderThickness="0" Click="numberButton_Click"/>
-        <Button Name="two" Tag="2" Content="2" Grid.Row="11" Grid.Column="3" BorderThickness="0" Click="numberButton_Click"/>
-        <Button Name="three" Tag="3" Content="3" Grid.Row="11" Grid.Column="5" BorderThickness="0" Click="numberButton_Click"/>
-        <Button Name="four" Tag="4" Content="4" Grid.Row="9" Grid.Column="1" BorderThickness="0" Click="numberButton_Click"/>
-        <Button Name="five" Tag="5" Content="5" Grid.Row="9" Grid.Column="3" BorderThickness="0" Click="numberButton_Click"/>
-        <Button Name="six" Tag="6" Content="6" Grid.Row="9" Grid.Column="5" BorderThickness="0" Click="numberButton_Click"/>
-        <Button Name="seven" Tag="7" Content="7" Grid.Row="7" Grid.Column="1" BorderThickness="0" Click="numberButton_Click"/>
-        <Button Name="eight" Tag="8" Content="8" Grid.Row="7" Grid.Column="3" BorderThickness="0" Click="numberButton_Click"/>
-        <Button Name="nine" Tag="9" Content="9" Grid.Row="7" Grid.Column="5" BorderThickness="0" Click="numberButton_Click"/>
-        <Button Name="dot" Tag="." Content="." Grid.Row="13" Grid.Column="5" BorderThickness="0" Click="numberButton_Click"/>
+        <Button Name="zero" Tag="0" Content="0" Grid.Row="9" Grid.Column="3" BorderThickness="0" Click="numberButton_Click"/>
+        <Button Name="one" Tag="1" Content="1" Grid.Row="7" Grid.Column="1" BorderThickness="0" Click="numberButton_Click"/>
+        <Button Name="two" Tag="2" Content="2" Grid.Row="7" Grid.Column="3" BorderThickness="0" Click="numberButton_Click"/>
+        <Button Name="three" Tag="3" Content="3" Grid.Row="7" Grid.Column="5" BorderThickness="0" Click="numberButton_Click"/>
+        <Button Name="four" Tag="4" Content="4" Grid.Row="5" Grid.Column="1" BorderThickness="0" Click="numberButton_Click"/>
+        <Button Name="five" Tag="5" Content="5" Grid.Row="5" Grid.Column="3" BorderThickness="0" Click="numberButton_Click"/>
+        <Button Name="six" Tag="6" Content="6" Grid.Row="5" Grid.Column="5" BorderThickness="0" Click="numberButton_Click"/>
+        <Button Name="seven" Tag="7" Content="7" Grid.Row="3" Grid.Column="1" BorderThickness="0" Click="numberButton_Click"/>
+        <Button Name="eight" Tag="8" Content="8" Grid.Row="3" Grid.Column="3" BorderThickness="0" Click="numberButton_Click"/>
+        <Button Name="nine" Tag="9" Content="9" Grid.Row="3" Grid.Column="5" BorderThickness="0" Click="numberButton_Click"/>
+        <Button Name="dot" Tag="." Content="." Grid.Row="9" Grid.Column="5" BorderThickness="0" Click="numberButton_Click"/>
     </Grid>
 </UserControl>

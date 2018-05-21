@@ -14,6 +14,7 @@ namespace Calculator
         private int operation = -1;
         private string board = "";
         private string numberToCalculate = "0";
+        private string numberToKeep;
 
         private int symbolInputCount = 0;
         private int negateInputCount = 0;
@@ -51,14 +52,27 @@ namespace Calculator
                         isFraction = false;
                     break;
                 case Constant.EQUAL:
-                    Calculate();
-                    number = 0;
-                    operation = -1;
-                    board = "";
-                    symbolInputCount = 0;
-                    isNewNumberInput = true;
-                    isFraction = false;
-                    break;
+                    if (!isNewNumberInput)
+                    {
+                        Calculate();
+                        number = 0;
+                        operation = -1;
+                        board = "";
+                        symbolInputCount = 0;
+                        isNewNumberInput = true;
+                        isFraction = false;
+                        PostOnScreen();
+                    }
+                    else
+                    {
+                        numberToKeep = string.Copy(numberToCalculate);
+                        Calculate();
+                        board = "";
+                        numberToCalculate = string.Copy(numberToKeep);
+                        PostOnScreen();
+                    }
+                    
+                    return;
             }
 
             PostOnScreen();
@@ -76,7 +90,6 @@ namespace Calculator
             }
             else
             {
-                //symbolInputCount = 0;
                 negateInputCount++;
             }
 
@@ -111,16 +124,14 @@ namespace Calculator
             }
 
             // 계산기 기능 시작시 연산부터 입력하는 경우
-            else if (numberToCalculate.Length == 0 || symbolInputCount > 1 && symbol != Constant.NEGATE)
-                board = $"{board} {Constant.OPERATION[symbol]}";
-            else if (symbol != Constant.NEGATE && !wasNegate)
+            if (symbol != Constant.NEGATE && !wasNegate)
             {
                 if (Convert.ToDouble(numberToCalculate) == 0 && numberToCalculate[0] == '-')
                     numberToCalculate = numberToCalculate.Remove(0, 1);
 
                 board = $"{board} {numberToCalculate} {Constant.OPERATION[symbol]}";
             }
-            else if (symbol != Constant.NEGATE)
+            else if (symbol != Constant.NEGATE && wasNegate)
             {
                 board = $"{board} {Constant.OPERATION[symbol]}";
                 wasNegate = false;
@@ -128,11 +139,13 @@ namespace Calculator
 
             // 계산
             if (operation != -1 && symbol != Constant.NEGATE)
+            {
                 Calculate();
+                operation = -1;
+            }
             else if (symbol == Constant.NEGATE)
             {
                 Negate();
-                wasNegate = true;
                 return;
             }
 
@@ -156,8 +169,6 @@ namespace Calculator
                     Compute(operation);
                     break;
             }
-
-            operation = -1;
         }
 
         public void Devide()
@@ -200,6 +211,8 @@ namespace Calculator
                 if (Convert.ToDouble(numberToCalculate) == 0 && numberToCalculate[0] == '-' && numberToCalculate[2] != '.')
                     numberToCalculate = numberToCalculate.Remove(0, 1);
 
+                wasNegate = false;
+
                 return;
             }
             else if (negateInputCount == 1)
@@ -231,6 +244,7 @@ namespace Calculator
             }
             
             PostOnScreen();
+            wasNegate = true;
         }
 
         public void Compute(int operation)
